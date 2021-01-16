@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
+import '../models/app.dart';
+import '../widgets/app_grid_item.dart';
 
 class PortfolioScreen extends StatefulWidget {
   static const routeName = '/';
@@ -13,6 +12,45 @@ class PortfolioScreen extends StatefulWidget {
 class _PortfolioScreenState extends State<PortfolioScreen> {
   int hovered = -1;
   int clickedPortfolioType = 0;
+
+  final apps = [
+    App(
+        name: "Some name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Flutter,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Another name",
+        iconUrl:
+        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Fine name",
+        iconUrl:
+        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Other,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Nice name",
+        iconUrl:
+        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Flutter,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Rich name",
+        iconUrl:
+        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Good name",
+        iconUrl:
+        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +148,31 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getPortfolioAppTypeText("All",theme,0),
-                  _getPortfolioAppTypeText("Kotlin",theme,1),
-                  _getPortfolioAppTypeText("Flutter",theme,2),
-                  _getPortfolioAppTypeText("Other",theme,3)
+                  _getPortfolioAppTypeText("All", theme, 0),
+                  _getPortfolioAppTypeText("Kotlin", theme, 1),
+                  _getPortfolioAppTypeText("Flutter", theme, 2),
+                  _getPortfolioAppTypeText("Other", theme, 3)
                 ],
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                  height: 900,
+                  width: 1200,
+                  child: GridView.builder(
+                    itemCount: apps.length,
+                    padding: const EdgeInsets.all(4.0),
+                    itemBuilder: (context, index) => AppGridItem(apps[index]),
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 1.0,
+                        mainAxisSpacing: 35.0,
+                        crossAxisSpacing: 4.0),
+                  )),
+              SizedBox(
+                height: 40,
               )
             ],
           ),
@@ -126,7 +184,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: AnimatedDefaultTextStyle(
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 250),
             style: theme.textTheme.headline5.copyWith(
                 letterSpacing: 1.0,
                 fontFamily: 'Lato',
@@ -145,23 +203,26 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
         },
       );
 
-  Widget _getPortfolioAppTypeText(String text,ThemeData theme, int clickedPosition)=>InkWell(
-    splashColor: Colors.transparent,
-    highlightColor:  Colors.transparent,
-    child: Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: AnimatedDefaultTextStyle(
-        duration: Duration(milliseconds: 200),
-        style: theme.textTheme.headline4.copyWith(
-          fontWeight: FontWeight.w400,
-            color: clickedPortfolioType == clickedPosition
-                ? theme.primaryColor
-                : Color(0xFFFFFFFF)),
-        child: Text(
-          text,
-        ),
-      ),
-    ),
-    onTap: () => setState(()=>clickedPortfolioType = clickedPosition)
-  );
+  Widget _getPortfolioAppTypeText(
+          String text, ThemeData theme, int clickedPosition) =>
+      InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 250),
+              style: theme.textTheme.headline4.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: clickedPortfolioType == clickedPosition
+                      ? theme.primaryColor
+                      : Color(0xFFFFFFFF)),
+              child: Text(
+                text,
+              ),
+            ),
+          ),
+          onTap: () {
+            setState(() => clickedPortfolioType = clickedPosition);
+          });
 }
