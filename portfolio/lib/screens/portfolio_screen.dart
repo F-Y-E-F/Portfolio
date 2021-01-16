@@ -1,3 +1,4 @@
+import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
 import '../models/app.dart';
 import '../widgets/app_grid_item.dart';
@@ -198,16 +199,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               Container(
                   height: 900,
                   width: 1200,
-                  child: GridView.builder(
-                    itemCount: apps.length,
-                    padding: const EdgeInsets.all(4.0),
-                    itemBuilder: (context, index) => AppGridItem(apps[index]),
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 1.0,
-                        mainAxisSpacing: 35.0,
-                        crossAxisSpacing: 4.0),
+                  child: AnimatedGrid(
+                    height: 900,
+                    width: 1200,
+                    keys: apps,
+                    cellRowNum: 2,
+                    cellColNum: 3,
+                    scrollDirection: Axis.horizontal,
+                    sortOrder: SortOrder.rightToLeft,
+                    builder: (context, index, _) => AppGridItem(apps[index]),
                   )),
               SizedBox(
                 height: 40,
@@ -268,16 +268,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   apps = allApps;
                   break;
                 case 1:
-                  apps = allApps.where((app) =>
-                      app.programmingLanguage == ProgrammingLanguage.Kotlin).toList();
+                  apps = allApps
+                      .where((app) =>
+                          app.programmingLanguage == ProgrammingLanguage.Kotlin)
+                      .toList();
                   break;
                 case 2:
-                  apps = allApps.where((app) =>
-                      app.programmingLanguage == ProgrammingLanguage.Flutter).toList();
+                  apps = allApps
+                      .where((app) =>
+                          app.programmingLanguage ==
+                          ProgrammingLanguage.Flutter)
+                      .toList();
                   break;
                 case 3:
-                  apps = allApps.where((app) =>
-                      app.programmingLanguage == ProgrammingLanguage.Other).toList();
+                  apps = allApps
+                      .where((app) =>
+                          app.programmingLanguage == ProgrammingLanguage.Other)
+                      .toList();
                   break;
                 default:
                   apps = allApps;
