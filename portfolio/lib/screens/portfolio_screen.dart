@@ -1,5 +1,7 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:portfolio/widgets/resume_list_item.dart';
 import '../models/app.dart';
 import '../widgets/app_grid_item.dart';
 
@@ -209,9 +211,81 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     sortOrder: SortOrder.rightToLeft,
                     builder: (context, index, _) => AppGridItem(apps[index]),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "My ",
+                    style: theme.textTheme.headline1
+                        .copyWith(fontWeight: FontWeight.w400, fontSize: 42.0),
+                  ),
+                  Text(
+                    "Resume",
+                    style: theme.textTheme.headline1
+                        .copyWith(fontSize: 42.0, color: theme.primaryColor),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3.5,
+                    child: Text(
+                      "Education ",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.headline2.copyWith(fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                  SizedBox(width: 25,),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3.5,
+                    child: Text(
+                      "Experience",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.headline2.copyWith(fontWeight: FontWeight.w300),
+                    ),
+                  ),
+
+                ],
+              ),SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3.5,
+                    height: 700,
+                    child: ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ResumeListItem(),
+                        ResumeListItem(),
+                        ResumeListItem()
+                      ],
+                    ),
+                  ), SizedBox(width: 25,),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3.5,
+                    height: 700,
+                    child: ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ResumeListItem(),
+                        ResumeListItem(),
+                        ResumeListItem()
+                      ],
+                    ),
+                  ),
+                ],
               )
+
             ],
           ),
         ));
@@ -251,7 +325,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             child: AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 250),
               style: theme.textTheme.headline4.copyWith(
-                  fontWeight: FontWeight.w400,
+                fontFamily: 'Lato',
+                  fontWeight: FontWeight.w300,
                   color: clickedPortfolioType == clickedPosition
                       ? theme.primaryColor
                       : Color(0xFFFFFFFF)),

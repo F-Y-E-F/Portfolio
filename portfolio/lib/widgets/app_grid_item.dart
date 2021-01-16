@@ -45,8 +45,8 @@ class _AppGridItemState extends State<AppGridItem> with TickerProviderStateMixin
             borderRadius: BorderRadius.circular(3),
             child: Image.network(
               widget.app.iconUrl,
-              width: 300,
-              height: 300,
+              width: 320,
+              height: 320,
             ),
           ),
           const SizedBox(
