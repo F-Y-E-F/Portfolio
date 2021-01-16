@@ -13,7 +13,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   int hovered = -1;
   int clickedPortfolioType = 0;
 
-  final apps = [
+  final allApps = [
     App(
         name: "Some name",
         iconUrl:
@@ -23,31 +23,69 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     App(
         name: "Another name",
         iconUrl:
-        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
         programmingLanguage: ProgrammingLanguage.Kotlin,
         releaseDate: DateTime.now()),
     App(
         name: "Fine name",
         iconUrl:
-        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
         programmingLanguage: ProgrammingLanguage.Other,
         releaseDate: DateTime.now()),
     App(
         name: "Nice name",
         iconUrl:
-        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
         programmingLanguage: ProgrammingLanguage.Flutter,
         releaseDate: DateTime.now()),
     App(
         name: "Rich name",
         iconUrl:
-        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
         programmingLanguage: ProgrammingLanguage.Kotlin,
         releaseDate: DateTime.now()),
     App(
         name: "Good name",
         iconUrl:
-        "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+  ];
+  var apps = [
+    App(
+        name: "Some name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Flutter,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Another name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Fine name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Other,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Nice name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Flutter,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Rich name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
+        programmingLanguage: ProgrammingLanguage.Kotlin,
+        releaseDate: DateTime.now()),
+    App(
+        name: "Good name",
+        iconUrl:
+            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
         programmingLanguage: ProgrammingLanguage.Kotlin,
         releaseDate: DateTime.now()),
   ];
@@ -223,6 +261,27 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             ),
           ),
           onTap: () {
-            setState(() => clickedPortfolioType = clickedPosition);
+            setState(() {
+              clickedPortfolioType = clickedPosition;
+              switch (clickedPosition) {
+                case 0:
+                  apps = allApps;
+                  break;
+                case 1:
+                  apps = allApps.where((app) =>
+                      app.programmingLanguage == ProgrammingLanguage.Kotlin).toList();
+                  break;
+                case 2:
+                  apps = allApps.where((app) =>
+                      app.programmingLanguage == ProgrammingLanguage.Flutter).toList();
+                  break;
+                case 3:
+                  apps = allApps.where((app) =>
+                      app.programmingLanguage == ProgrammingLanguage.Other).toList();
+                  break;
+                default:
+                  apps = allApps;
+              }
+            });
           });
 }
