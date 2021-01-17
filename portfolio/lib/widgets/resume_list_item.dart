@@ -2,18 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class ResumeListItem extends StatelessWidget {
+
+  final String name;
+  final DateTime date;
+  final String description;
+  final String place;
+
+  ResumeListItem(this.name,this.description,this.date,this.place);
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
       margin: EdgeInsets.only(bottom: 25),
       decoration: BoxDecoration(
-          color: Color(0xff202020), borderRadius: BorderRadius.circular(5)),
+          color: const Color(0xff202020), borderRadius: BorderRadius.circular(5)),
       width: MediaQuery.of(context).size.width / 3.7,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(26, 30, 26, 20),
+        padding: const EdgeInsets.fromLTRB(26, 34, 26, 22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,25 +30,25 @@ class ResumeListItem extends StatelessWidget {
               children: [
                 Icon(Icons.calendar_today_outlined,
                     size: 16, color: Colors.white),
-                const SizedBox(width: 7),
-                Text("June 2019",
+                const SizedBox(width: 10),
+                Text("${DateFormat('MMMM yyyy').format(date)} - Present",
                     style: theme.textTheme.headline6
                         .copyWith(fontWeight: FontWeight.w700, fontSize: 13))
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 10,
             ),
             Text(
-              "Primary school in somewhere",
+              name,
               style: theme.textTheme.headline3.copyWith(
-                  color: theme.primaryColor, fontWeight: FontWeight.w300),
+                  color: theme.primaryColor, fontWeight: FontWeight.w300,fontSize: 22),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
+              description,
               style: theme.textTheme.headline6.copyWith(
                   color: Colors.grey, height: 1.5, letterSpacing: 0.7),
             ),
@@ -47,7 +56,7 @@ class ResumeListItem extends StatelessWidget {
               height: 15,
             ),
             Text(
-              "Somewhere",
+              place,
               style: theme.textTheme.headline6.copyWith(color: Colors.grey),
             )
           ],

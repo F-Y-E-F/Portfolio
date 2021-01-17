@@ -1,12 +1,10 @@
-
-
-class Resume{
+class Resume {
   DateTime endTime;
-  String schoolName;
+  String name;
   String description;
   String place;
 
-  Resume({this.description,this.endTime,this.place,this.schoolName});
-  
+  Resume({this.description, this.endTime, this.place, this.name});
+
 
 }

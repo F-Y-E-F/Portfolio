@@ -1,5 +1,6 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/helpers/resume_lists.dart';
 import 'package:portfolio/providers/apps.dart';
 import 'package:portfolio/widgets/resume_list_item.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +14,10 @@ class PortfolioScreen extends StatefulWidget {
 }
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
+  final resumeLists = ResumeLists();
+
   int hovered = -1;
   int clickedPortfolioType = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -94,21 +96,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               const SizedBox(
                 height: 100,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Featured ",
-                    style: theme.textTheme.headline1
-                        .copyWith(fontWeight: FontWeight.w400, fontSize: 42.0),
-                  ),
-                  Text(
-                    "Portfolio",
-                    style: theme.textTheme.headline1
-                        .copyWith(fontSize: 42.0, color: theme.primaryColor),
-                  ),
-                ],
-              ),
+              _getTitleText(theme, "Featured ", "Portfolio"),
               const SizedBox(
                 height: 30,
               ),
@@ -140,21 +128,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               const SizedBox(
                 height: 80,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "My ",
-                    style: theme.textTheme.headline1
-                        .copyWith(fontWeight: FontWeight.w400, fontSize: 42.0),
-                  ),
-                  Text(
-                    "Resume",
-                    style: theme.textTheme.headline1
-                        .copyWith(fontSize: 42.0, color: theme.primaryColor),
-                  ),
-                ],
-              ),
+              _getTitleText(theme, "My ", "Resume"),
               const SizedBox(
                 height: 60,
               ),
@@ -192,29 +166,26 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width / 3.7,
-                    height: 700,
+                    height: 780,
                     child: ListView(
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        ResumeListItem(),
-                        ResumeListItem(),
-                        ResumeListItem()
-                      ],
-                    ),
+                        physics: NeverScrollableScrollPhysics(),
+                        children: resumeLists
+                            .getEducationsList()
+                            .map((resume) => ResumeListItem(resume.name,resume.description,resume.endTime,resume.place))
+                            .toList()),
                   ),
                   const SizedBox(
                     width: 25,
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width / 3.7,
-                    height: 700,
+                    height: 780,
                     child: ListView(
                       physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        ResumeListItem(),
-                        ResumeListItem(),
-                        ResumeListItem()
-                      ],
+                      children: resumeLists
+                          .getExperienceList()
+                          .map((resume) => ResumeListItem(resume.name,resume.description,resume.endTime,resume.place))
+                          .toList(),
                     ),
                   ),
                 ],
@@ -236,21 +207,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "About ",
-                            style: theme.textTheme.headline1.copyWith(
-                                fontWeight: FontWeight.w400, fontSize: 42.0),
-                          ),
-                          Text(
-                            "Me",
-                            style: theme.textTheme.headline1.copyWith(
-                                fontSize: 42.0, color: theme.primaryColor),
-                          ),
-                        ],
-                      ),
+                      _getTitleText(theme, "About ", "Me"),
                       const SizedBox(
                         height: 30,
                       ),
@@ -275,7 +232,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       Row(
                         children: [
                           FlatButton(
-                            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 19),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 19),
                             onPressed: () {},
                             child: Text(
                               'HIRE ME',
@@ -283,14 +241,19 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w300,
-                                  fontFamily: 'Lato',letterSpacing: 1.0),
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 1.0),
                             ),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100)),
                             color: theme.primaryColor,
-                          ),SizedBox(width: 10,),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           FlatButton(
-                            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 19),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 19),
                             onPressed: () {},
                             child: Text(
                               'VISIT MY GITHUB',
@@ -298,41 +261,32 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w300,
-                                  fontFamily: 'Lato',letterSpacing: 1.0),
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 1.0),
                             ),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100)),
-                            color: Color(0xff8f8f8f),
+                            color: const Color(0xff8f8f8f),
                           )
                         ],
                       ),
-                      const SizedBox(height: 20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(height: 100,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "My ",
-                    style: theme.textTheme.headline1.copyWith(
-                        fontWeight: FontWeight.w400, fontSize: 42.0),
-                  ),
-                  Text(
-                    "Services",
-                    style: theme.textTheme.headline1.copyWith(
-                        fontSize: 42.0, color: theme.primaryColor),
-                  ),
-                ],
+              const SizedBox(
+                height: 100,
               ),
+              _getTitleText(theme, "My ", "Services")
             ],
           ),
         ));
   }
 
-  //------------------- get to menu item ----------------------
+  //--------------------------| Get menu color item |---------------------------
   Widget _getMenuItem(String title, ThemeData theme, int position) => InkWell(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -355,6 +309,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           setState(() => isHover ? hovered = position : hovered = -1);
         },
       );
+
+  //============================================================================
+
+  //--------------------------| get app type text widget |-------------------------------
 
   Widget _getPortfolioAppTypeText(
           String text, ThemeData theme, int clickedPosition) =>
@@ -380,6 +338,27 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             setState(() {
               clickedPortfolioType = clickedPosition;
             });
-            Provider.of<Apps>(context,listen: false).getApps(clickedPosition);
+            Provider.of<Apps>(context, listen: false).getApps(clickedPosition);
           });
+
+  //=======================================================================================
+
+  //-----------------------------| Get title 2-color text |---------------------------------
+  Widget _getTitleText(ThemeData theme, String normalText, String yellowText) =>
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            normalText,
+            style: theme.textTheme.headline1
+                .copyWith(fontWeight: FontWeight.w400, fontSize: 42.0),
+          ),
+          Text(
+            yellowText,
+            style: theme.textTheme.headline1
+                .copyWith(fontSize: 42.0, color: theme.primaryColor),
+          ),
+        ],
+      );
+//===========================================================================================
 }
