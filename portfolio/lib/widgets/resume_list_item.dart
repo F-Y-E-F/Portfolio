@@ -11,7 +11,7 @@ class ResumeListItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 25),
       decoration: BoxDecoration(
           color: Color(0xff202020), borderRadius: BorderRadius.circular(5)),
-      width: MediaQuery.of(context).size.width / 3.5,
+      width: MediaQuery.of(context).size.width / 3.7,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(26, 30, 26, 20),
         child: Column(

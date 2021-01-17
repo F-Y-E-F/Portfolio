@@ -1,4 +1,5 @@
 import 'package:animated_grid/animated_grid.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:portfolio/widgets/resume_list_item.dart';
@@ -212,7 +213,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     builder: (context, index, _) => AppGridItem(apps[index]),
                   )),
               const SizedBox(
-                height: 40,
+                height: 80,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -230,37 +231,42 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: 60,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width / 3.5,
+                    width: MediaQuery.of(context).size.width / 3.7,
                     child: Text(
                       "Education ",
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.headline2.copyWith(fontWeight: FontWeight.w300),
+                      style: theme.textTheme.headline2
+                          .copyWith(fontWeight: FontWeight.w300),
                     ),
                   ),
-                  SizedBox(width: 25,),
+                  const SizedBox(
+                    width: 25,
+                  ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 3.5,
+                    width: MediaQuery.of(context).size.width / 3.7,
                     child: Text(
                       "Experience",
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.headline2.copyWith(fontWeight: FontWeight.w300),
+                      style: theme.textTheme.headline2
+                          .copyWith(fontWeight: FontWeight.w300),
                     ),
                   ),
-
                 ],
-              ),SizedBox(height: 20,),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width / 3.5,
+                    width: MediaQuery.of(context).size.width / 3.7,
                     height: 700,
                     child: ListView(
                       physics: NeverScrollableScrollPhysics(),
@@ -270,9 +276,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         ResumeListItem()
                       ],
                     ),
-                  ), SizedBox(width: 25,),
+                  ),
+                  const SizedBox(
+                    width: 25,
+                  ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 3.5,
+                    width: MediaQuery.of(context).size.width / 3.7,
                     height: 700,
                     child: ListView(
                       physics: NeverScrollableScrollPhysics(),
@@ -284,8 +293,115 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     ),
                   ),
                 ],
-              )
-
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/placeholder_two.jpg',
+                    width: MediaQuery.of(context).size.width / 3,
+                  ),
+                  const SizedBox(
+                    width: 70,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "About ",
+                            style: theme.textTheme.headline1.copyWith(
+                                fontWeight: FontWeight.w400, fontSize: 42.0),
+                          ),
+                          Text(
+                            "Me",
+                            style: theme.textTheme.headline1.copyWith(
+                                fontSize: 42.0, color: theme.primaryColor),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
+                        style: theme.textTheme.headline4.copyWith(
+                            fontWeight: FontWeight.w300,
+                            color: Colors.grey,
+                            fontSize: 18),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
+                        style: theme.textTheme.headline6
+                            .copyWith(color: Colors.grey, fontSize: 15.5),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: [
+                          FlatButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 19),
+                            onPressed: () {},
+                            child: Text(
+                              'HIRE ME',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Lato',letterSpacing: 1.0),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100)),
+                            color: theme.primaryColor,
+                          ),SizedBox(width: 10,),
+                          FlatButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 19),
+                            onPressed: () {},
+                            child: Text(
+                              'VISIT MY GITHUB',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Lato',letterSpacing: 1.0),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100)),
+                            color: Color(0xff8f8f8f),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 20,),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 100,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "My ",
+                    style: theme.textTheme.headline1.copyWith(
+                        fontWeight: FontWeight.w400, fontSize: 42.0),
+                  ),
+                  Text(
+                    "Services",
+                    style: theme.textTheme.headline1.copyWith(
+                        fontSize: 42.0, color: theme.primaryColor),
+                  ),
+                ],
+              ),
             ],
           ),
         ));
@@ -325,7 +441,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             child: AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 250),
               style: theme.textTheme.headline4.copyWith(
-                fontFamily: 'Lato',
+                  fontFamily: 'Lato',
                   fontWeight: FontWeight.w300,
                   color: clickedPortfolioType == clickedPosition
                       ? theme.primaryColor
