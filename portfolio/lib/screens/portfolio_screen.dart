@@ -1,8 +1,9 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/helpers/resume_lists.dart';
-import 'package:portfolio/providers/apps.dart';
-import 'package:portfolio/widgets/resume_list_item.dart';
+import '../helpers/resume_lists.dart';
+import '../providers/apps.dart';
+import '../widgets/resume_list_item.dart';
+import '../widgets/service_Item.dart';
 import 'package:provider/provider.dart';
 import '../widgets/app_grid_item.dart';
 
@@ -214,9 +215,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
                         style: theme.textTheme.headline4.copyWith(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.grey,
-                            fontSize: 18),
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xff8f8f8f),
+                            fontSize: 19),
                       ),
                       const SizedBox(
                         height: 20,
@@ -224,7 +225,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
                         style: theme.textTheme.headline6
-                            .copyWith(color: Colors.grey, fontSize: 15.5),
+                            .copyWith(color: const Color(0xff8f8f8f), fontSize: 16,letterSpacing: 0.7),
                       ),
                       const SizedBox(
                         height: 30,
@@ -278,9 +279,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ],
               ),
               const SizedBox(
-                height: 100,
+                height: 120,
               ),
-              _getTitleText(theme, "My ", "Services")
+              _getTitleText(theme, "My ", "Services"),
+              const SizedBox(height: 80,),
+              ServiceItem()
             ],
           ),
         ));
