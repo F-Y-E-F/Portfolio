@@ -1,9 +1,8 @@
 import 'package:animated_grid/animated_grid.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:portfolio/providers/apps.dart';
 import 'package:portfolio/widgets/resume_list_item.dart';
-import '../models/app.dart';
+import 'package:provider/provider.dart';
 import '../widgets/app_grid_item.dart';
 
 class PortfolioScreen extends StatefulWidget {
@@ -17,87 +16,13 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   int hovered = -1;
   int clickedPortfolioType = 0;
 
-  final allApps = [
-    App(
-        name: "Some name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Flutter,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Another name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Fine name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Other,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Nice name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Flutter,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Rich name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Good name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-  ];
-  var apps = [
-    App(
-        name: "Some name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Flutter,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Another name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Fine name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Other,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Nice name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Flutter,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Rich name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-    App(
-        name: "Good name",
-        iconUrl:
-            "https://cdn.pixabay.com/photo/2020/05/04/18/55/avocado-5130214_960_720.png",
-        programmingLanguage: ProgrammingLanguage.Kotlin,
-        releaseDate: DateTime.now()),
-  ];
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final mediaQuery = MediaQuery.of(context);
+
+    final apps = Provider.of<Apps>(context).apps;
 
     return Scaffold(
         backgroundColor: theme.backgroundColor,
@@ -454,32 +379,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           onTap: () {
             setState(() {
               clickedPortfolioType = clickedPosition;
-              switch (clickedPosition) {
-                case 0:
-                  apps = allApps;
-                  break;
-                case 1:
-                  apps = allApps
-                      .where((app) =>
-                          app.programmingLanguage == ProgrammingLanguage.Kotlin)
-                      .toList();
-                  break;
-                case 2:
-                  apps = allApps
-                      .where((app) =>
-                          app.programmingLanguage ==
-                          ProgrammingLanguage.Flutter)
-                      .toList();
-                  break;
-                case 3:
-                  apps = allApps
-                      .where((app) =>
-                          app.programmingLanguage == ProgrammingLanguage.Other)
-                      .toList();
-                  break;
-                default:
-                  apps = allApps;
-              }
             });
+            Provider.of<Apps>(context,listen: false).getApps(clickedPosition);
           });
 }
