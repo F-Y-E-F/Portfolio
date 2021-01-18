@@ -48,10 +48,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               _getMenuItem('HOME', theme, 0, 0),
-                              _getMenuItem('PORTFOLIO', theme,1, 1050),
-                              _getMenuItem('RESUME', theme,2, 2250),
-                              _getMenuItem('ABOUT', theme,3, 3300),
-                              _getMenuItem('CONTACT', theme,4, 4000)
+                              _getMenuItem('PORTFOLIO', theme, 1, 1050),
+                              _getMenuItem('RESUME', theme, 2, 2250),
+                              _getMenuItem('ABOUT', theme, 3, 3300),
+                              _getMenuItem('CONTACT', theme, 4, 4600)
                             ],
                           ),
                         ),
@@ -97,8 +97,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image:
-                              const AssetImage('assets/images/placeholder.jpg'))),
+                          image: const AssetImage(
+                              'assets/images/placeholder.jpg'))),
                 ),
                 const SizedBox(
                   height: 100,
@@ -195,8 +195,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         physics: NeverScrollableScrollPhysics(),
                         children: resumeLists
                             .getExperienceList()
-                            .map((resume) => ResumeListItem(resume.name,
-                                resume.description, resume.endTime, resume.place))
+                            .map((resume) => ResumeListItem(
+                                resume.name,
+                                resume.description,
+                                resume.endTime,
+                                resume.place))
                             .toList(),
                       ),
                     ),
@@ -339,6 +342,119 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Form(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              width: MediaQuery.of(context).size.width / 3.7,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: 'name',
+                                    hintStyle: theme.textTheme.headline4
+                                        .copyWith(
+                                            fontSize: 16, color: Colors.grey),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 12),
+                                    fillColor: Color(0xFF202020),
+                                    filled: true),
+                                style: theme.textTheme.headline4
+                                    .copyWith(fontSize: 15),
+                                cursorColor: theme.primaryColor,
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 10),
+                              width: MediaQuery.of(context).size.width / 3.7,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: 'email',
+                                    hintStyle: theme.textTheme.headline4
+                                        .copyWith(
+                                            fontSize: 16, color: Colors.grey),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 12),
+                                    fillColor: Color(0xFF202020),
+                                    filled: true),
+                                style: theme.textTheme.headline4
+                                    .copyWith(fontSize: 15),
+                                cursorColor: theme.primaryColor,
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 10),
+                              width: MediaQuery.of(context).size.width / 3.7,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: 'phone',
+                                    hintStyle: theme.textTheme.headline4
+                                        .copyWith(
+                                            fontSize: 16, color: Colors.grey),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 12),
+                                    fillColor: Color(0xFF202020),
+                                    filled: true),
+                                style: theme.textTheme.headline4
+                                    .copyWith(fontSize: 15),
+                                cursorColor: theme.primaryColor,
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(top: 10),
+                              width: MediaQuery.of(context).size.width / 3.7,
+                              child: TextField(
+                                textInputAction: TextInputAction.newline,
+                                keyboardType: TextInputType.multiline,
+                                minLines: 10,
+                                maxLines: 20,
+                                decoration: InputDecoration(
+                                    hintText: 'message',
+                                    hintStyle: theme.textTheme.headline4
+                                        .copyWith(
+                                            fontSize: 16, color: Colors.grey),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    fillColor: Color(0xFF202020),
+                                    filled: true),
+                                style: theme.textTheme.headline4
+                                    .copyWith(fontSize: 15),
+                                cursorColor: theme.primaryColor,
+                              )),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          FlatButton(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 25),
+                            onPressed: () {},
+                            child: Text(
+                              'SEND MESSAGE',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 1.0),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100)),
+                            color: theme.primaryColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3.7,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
               ],
             ),
           ),
@@ -346,7 +462,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   }
 
   //--------------------------| Get menu color item |---------------------------
-  Widget _getMenuItem(String title, ThemeData theme, int position,double offset) => InkWell(
+  Widget _getMenuItem(
+          String title, ThemeData theme, int position, double offset) =>
+      InkWell(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: AnimatedDefaultTextStyle(
@@ -363,8 +481,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             ),
           ),
         ),
-        onTap: (){
-          scrollController.animateTo(offset,duration: Duration(milliseconds: 500),curve:Curves.linear);
+        onTap: () {
+          scrollController.animateTo(offset,
+              duration: Duration(milliseconds: 500), curve: Curves.linear);
         },
         onHover: (isHover) {
           setState(() => isHover ? hovered = position : hovered = -1);
