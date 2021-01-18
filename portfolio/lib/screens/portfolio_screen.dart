@@ -1,5 +1,7 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:portfolio/helpers/service_list.dart';
 import '../helpers/resume_lists.dart';
 import '../providers/apps.dart';
 import '../widgets/resume_list_item.dart';
@@ -160,7 +162,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 25,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +174,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         physics: NeverScrollableScrollPhysics(),
                         children: resumeLists
                             .getEducationsList()
-                            .map((resume) => ResumeListItem(resume.name,resume.description,resume.endTime,resume.place))
+                            .map((resume) => ResumeListItem(
+                                resume.name,
+                                resume.description,
+                                resume.endTime,
+                                resume.place))
                             .toList()),
                   ),
                   const SizedBox(
@@ -185,7 +191,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       physics: NeverScrollableScrollPhysics(),
                       children: resumeLists
                           .getExperienceList()
-                          .map((resume) => ResumeListItem(resume.name,resume.description,resume.endTime,resume.place))
+                          .map((resume) => ResumeListItem(resume.name,
+                              resume.description, resume.endTime, resume.place))
                           .toList(),
                     ),
                   ),
@@ -224,8 +231,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       ),
                       Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDuis semper diam at lacus condimentum, id efficitur.\nNullam ornare dignissim nibh ac tempus.",
-                        style: theme.textTheme.headline6
-                            .copyWith(color: const Color(0xff8f8f8f), fontSize: 16,letterSpacing: 0.7),
+                        style: theme.textTheme.headline6.copyWith(
+                            color: const Color(0xff8f8f8f),
+                            fontSize: 16,
+                            letterSpacing: 0.7),
                       ),
                       const SizedBox(
                         height: 30,
@@ -282,8 +291,21 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 height: 120,
               ),
               _getTitleText(theme, "My ", "Services"),
-              const SizedBox(height: 80,),
-              ServiceItem()
+              const SizedBox(
+                height: 60,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: ServiceList()
+                    .getServiceList()
+                    .map((service) => ServiceItem(
+                        service.title, service.description, service.image))
+                    .toList(),
+              ),
+              const SizedBox(
+                height: 120,
+              ),
+              _getTitleText(theme, "Get ", "In Touch"),
             ],
           ),
         ));

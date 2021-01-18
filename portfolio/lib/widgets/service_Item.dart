@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class ServiceItem extends StatelessWidget {
+  final String image;
+  final String title;
+  final String description;
+
+  ServiceItem(this.title, this.description, this.image);
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal:40.0,vertical: 30),
-        width: MediaQuery.of(context).size.width / 4.9,
+        margin: const EdgeInsets.only(left: 17, right: 17),
+        padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 40),
+        width: MediaQuery.of(context).size.width / 5.3,
         decoration: BoxDecoration(
             color: const Color(0xff202020),
             borderRadius: BorderRadius.circular(2)),
@@ -20,14 +28,14 @@ class ServiceItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100)),
               padding: const EdgeInsets.all(30),
               child: Image.network(
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1024px-Kotlin-logo.svg.png',
+                image,
               ),
             ),
             const SizedBox(
               height: 25,
             ),
             Text(
-              'Kotlin support',
+              title,
               style: theme.textTheme.headline3.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w300,
@@ -37,7 +45,7 @@ class ServiceItem extends StatelessWidget {
               height: 20,
             ),
             Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Duis semper diam at lacus condimentum, id efficitur. Nullam ornare dignissim nibh ac tempus.",
+              description,
               style: theme.textTheme.headline6.copyWith(
                   color: const Color(0xff8f8f8f),
                   fontSize: 16,
@@ -45,9 +53,34 @@ class ServiceItem extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(
-              height: 80,
+              height: 70,
             ),
-            FlatButton(onPressed: (){}, child: Text("Check this out  >",style: theme.textTheme.headline5.copyWith(color: theme.primaryColor),),splashColor: Colors.transparent,highlightColor: Colors.transparent,)
+            FlatButton(
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Check this out",
+                    style: theme.textTheme.headline5
+                        .copyWith(color: theme.primaryColor, fontSize: 17),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: theme.primaryColor,
+                    size: 17,
+                  )
+                ],
+              ),
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
           ],
         ));
   }
