@@ -1,5 +1,8 @@
 import 'package:animated_grid/animated_grid.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/helpers/social_media_list.dart';
+import 'package:portfolio/widgets/social_media_item.dart';
 import '../helpers/service_list.dart';
 import '../helpers/resume_lists.dart';
 import '../providers/apps.dart';
@@ -27,7 +30,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     final theme = Theme.of(context);
     final mediaQuery = MediaQuery.of(context);
 
-    final apps = Provider.of<Apps>(context).apps;
+    final apps = Provider
+        .of<Apps>(context)
+        .apps;
 
     return Scaffold(
         backgroundColor: theme.backgroundColor,
@@ -143,7 +148,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       child: Text(
                         "Education ",
                         textAlign: TextAlign.center,
@@ -155,7 +163,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       width: 25,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       child: Text(
                         "Experience",
                         textAlign: TextAlign.center,
@@ -172,13 +183,17 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       height: 780,
                       child: ListView(
                           physics: NeverScrollableScrollPhysics(),
                           children: resumeLists
                               .getEducationsList()
-                              .map((resume) => ResumeListItem(
+                              .map((resume) =>
+                              ResumeListItem(
                                   resume.name,
                                   resume.description,
                                   resume.endTime,
@@ -189,13 +204,17 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       width: 25,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       height: 780,
                       child: ListView(
                         physics: NeverScrollableScrollPhysics(),
                         children: resumeLists
                             .getExperienceList()
-                            .map((resume) => ResumeListItem(
+                            .map((resume) =>
+                            ResumeListItem(
                                 resume.name,
                                 resume.description,
                                 resume.endTime,
@@ -214,7 +233,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   children: [
                     Image.asset(
                       'assets/images/placeholder_two.jpg',
-                      width: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3,
                     ),
                     const SizedBox(
                       width: 70,
@@ -305,7 +327,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: ServiceList()
                       .getServiceList()
-                      .map((service) => ServiceItem(
+                      .map((service) =>
+                      ServiceItem(
                           service.title, service.description, service.image))
                       .toList(),
                 ),
@@ -320,7 +343,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       child: Text(
                         "Get In Touch",
                         textAlign: TextAlign.center,
@@ -332,7 +358,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       width: 25,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
                       child: Text(
                         "Find Me On!",
                         textAlign: TextAlign.center,
@@ -347,6 +376,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Form(
                       child: Column(
@@ -354,13 +384,16 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              width: MediaQuery.of(context).size.width / 3.7,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 3.7,
                               child: TextField(
                                 decoration: InputDecoration(
                                     hintText: 'name',
                                     hintStyle: theme.textTheme.headline4
                                         .copyWith(
-                                            fontSize: 16, color: Colors.grey),
+                                        fontSize: 16, color: Colors.grey),
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 12),
                                     fillColor: Color(0xFF202020),
@@ -371,13 +404,16 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 10),
-                              width: MediaQuery.of(context).size.width / 3.7,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 3.7,
                               child: TextField(
                                 decoration: InputDecoration(
                                     hintText: 'email',
                                     hintStyle: theme.textTheme.headline4
                                         .copyWith(
-                                            fontSize: 16, color: Colors.grey),
+                                        fontSize: 16, color: Colors.grey),
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 12),
                                     fillColor: Color(0xFF202020),
@@ -388,13 +424,16 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 10),
-                              width: MediaQuery.of(context).size.width / 3.7,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 3.7,
                               child: TextField(
                                 decoration: InputDecoration(
                                     hintText: 'phone',
                                     hintStyle: theme.textTheme.headline4
                                         .copyWith(
-                                            fontSize: 16, color: Colors.grey),
+                                        fontSize: 16, color: Colors.grey),
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 12),
                                     fillColor: Color(0xFF202020),
@@ -405,7 +444,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               )),
                           Container(
                               margin: EdgeInsets.only(top: 10),
-                              width: MediaQuery.of(context).size.width / 3.7,
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 3.7,
                               child: TextField(
                                 textInputAction: TextInputAction.newline,
                                 keyboardType: TextInputType.multiline,
@@ -415,7 +457,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                     hintText: 'message',
                                     hintStyle: theme.textTheme.headline4
                                         .copyWith(
-                                            fontSize: 16, color: Colors.grey),
+                                        fontSize: 16, color: Colors.grey),
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
                                     fillColor: Color(0xFF202020),
@@ -448,7 +490,27 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 3.7,
+                      padding: EdgeInsets.only(left: 25),
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 3.7,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: SocialMediaList().getFirstLine()
+                                  .map((socialMedia) => SocialMediaItem(socialMedia.image,socialMedia.url)).toList()
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  SocialMediaList().getSecondLine()
+                                .map((socialMedia) => SocialMediaItem(socialMedia.image,socialMedia.url)).toList()
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -458,12 +520,13 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               ],
             ),
           ),
-        ));
+        )
+    );
   }
 
   //--------------------------| Get menu color item |---------------------------
-  Widget _getMenuItem(
-          String title, ThemeData theme, int position, double offset) =>
+  Widget _getMenuItem(String title, ThemeData theme, int position,
+      double offset) =>
       InkWell(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -494,8 +557,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   //--------------------------| get app type text widget |-------------------------------
 
-  Widget _getPortfolioAppTypeText(
-          String text, ThemeData theme, int clickedPosition) =>
+  Widget _getPortfolioAppTypeText(String text, ThemeData theme,
+      int clickedPosition) =>
       InkWell(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -540,5 +603,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           ),
         ],
       );
+
 //===========================================================================================
+
 }
