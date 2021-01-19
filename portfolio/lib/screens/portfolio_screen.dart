@@ -508,6 +508,22 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:  SocialMediaList().getSecondLine()
                                 .map((socialMedia) => SocialMediaItem(socialMedia.image,socialMedia.url)).toList()
+                          ),
+
+                          Container(
+                            margin: const EdgeInsets.only(top: 30),
+                            padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: theme.primaryColor,width: 2),
+                              borderRadius: BorderRadius.circular(2)
+                            ),
+                            child: Column(
+                              children: [
+                                Text("Contact me on what you want to!",style: theme.textTheme.headline4,),
+                                SizedBox(height: 5,),
+                                Text("If you want to get my full CV",style: theme.textTheme.headline5,),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -516,6 +532,13 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ),
                 const SizedBox(
                   height: 100,
+                ),
+                Text(
+                  "Copyright © All rights reserved | Kacper Wojak Portfolio CV",
+                  style: theme.textTheme.headline4.copyWith(color: Colors.grey),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
