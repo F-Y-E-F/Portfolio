@@ -36,9 +36,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
     return Scaffold(
         backgroundColor: theme.backgroundColor,
-        body: Scrollbar(
+        body: CupertinoScrollbar(
           thickness: 5,
           controller: scrollController,
+
           child: SingleChildScrollView(
             controller: scrollController,
             child: Column(
@@ -613,7 +614,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget _getTitleText(ThemeData theme, String normalText, String yellowText) =>
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: [ 
           Text(
             normalText,
             style: theme.textTheme.headline1
