@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/providers/apps.dart';
 import 'package:provider/provider.dart';
-import './screens/portfolio_screen.dart';
+import 'screens/portfolio_screen/portfolio_screen.dart';
 
 void main() {
   runApp(Portfolio());
@@ -21,6 +21,7 @@ class Portfolio extends StatelessWidget {
           primaryColor: Color(0xFFFCA311),
           backgroundColor: Color(0xFF0E0E0E),
           accentColor: Color(0xFF202020),
+          colorScheme: ThemeData.light().colorScheme.copyWith(onSurface: Color(0xFFBCBCBC)),
           textTheme: ThemeData.light().textTheme.copyWith(
             headline1: TextStyle(fontSize: 36.0,color: Colors.white,fontWeight: FontWeight.w700),
             headline2: TextStyle(fontSize: 30.0,color: Colors.white,fontWeight: FontWeight.w700),
