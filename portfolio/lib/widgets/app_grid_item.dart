@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../helpers/launch_website.dart';
 import '../models/app.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppGridItem extends StatefulWidget {
   final App app;
@@ -92,7 +92,7 @@ class _AppGridItemState extends State<AppGridItem>
                           splashColor: Colors.transparent,
                           hoverColor: Colors.white10,
                           padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
-                          onPressed: _launchURL,
+                          onPressed: () async => await LaunchWebsite().openNewWebsiteCard('https://google.com'),
                           child: Text(
                             'Check this out',
                             style: TextStyle(
@@ -135,11 +135,5 @@ class _AppGridItemState extends State<AppGridItem>
     );
   }
 
-  Future<void> _launchURL() async {
-    if (await canLaunch(widget.app.appUrl)) {
-      await launch(widget.app.appUrl);
-    } else {
-      throw 'Could not launch ${widget.app.appUrl}';
-    }
-  }
+
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../helpers/launch_website.dart';
 import '../../helpers/service_list.dart';
 import '../../widgets/service_Item.dart';
 
@@ -73,7 +74,8 @@ class AboutMe extends StatelessWidget {
                     FlatButton(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 40, vertical: 19),
-                      onPressed: () {},
+                      onPressed: () async => await LaunchWebsite().openNewWebsiteCard('https://github.com/F-Y-E-F'),
+
                       child: Text(
                         'VISIT MY GITHUB',
                         style: TextStyle(
@@ -117,4 +119,6 @@ class AboutMe extends StatelessWidget {
       ],
     );
   }
+
+
 }

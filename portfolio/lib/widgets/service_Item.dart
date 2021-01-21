@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/service_screen.dart';
 
 class ServiceItem extends StatelessWidget {
   final String image;
@@ -57,7 +58,7 @@ class ServiceItem extends StatelessWidget {
             FlatButton(
               focusColor: Colors.transparent,
               hoverColor: Colors.transparent,
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed(ServiceScreen.routeName),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

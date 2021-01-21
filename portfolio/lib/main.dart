@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/service_screen.dart';
 import './providers/apps.dart';
 import 'package:provider/provider.dart';
 import './screens/portfolio_screen.dart';
@@ -33,7 +34,8 @@ class Portfolio extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          PortfolioScreen.routeName : (context) => PortfolioScreen()
+          PortfolioScreen.routeName : (context) => PortfolioScreen(),
+          ServiceScreen.routeName : (context) => ServiceScreen(),
         },
       ),
     );
