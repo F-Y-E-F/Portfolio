@@ -1,7 +1,7 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/providers/apps.dart';
-import 'package:portfolio/widgets/app_grid_item.dart';
+import '../../providers/apps.dart';
+import '../../widgets/app_grid_item.dart';
 import 'package:provider/provider.dart';
 
 class AppsGrid extends StatefulWidget {

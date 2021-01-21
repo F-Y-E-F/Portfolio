@@ -1,4 +1,4 @@
-import 'package:portfolio/models/social_media.dart';
+import '../models/social_media.dart';
 
 class SocialMediaList {
   List<SocialMedia> getFirstLine() => [

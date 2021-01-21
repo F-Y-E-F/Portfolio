@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/helpers/resume_lists.dart';
-import 'package:portfolio/widgets/resume_list_item.dart';
+import '../../helpers/resume_lists.dart';
+import '../../widgets/resume_list_item.dart';
 
 class ResumeTabs extends StatelessWidget {
   final resumeLists = ResumeLists();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/helpers/service_list.dart';
-import 'package:portfolio/widgets/service_Item.dart';
+import '../../helpers/service_list.dart';
+import '../../widgets/service_Item.dart';
 
 class AboutMe extends StatelessWidget {
   final Function _getTitleText;

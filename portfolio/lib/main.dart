@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/providers/apps.dart';
+import './providers/apps.dart';
 import 'package:provider/provider.dart';
-import 'screens/portfolio_screen/portfolio_screen.dart';
+import './screens/portfolio_screen.dart';
 
 void main() {
   runApp(Portfolio());
