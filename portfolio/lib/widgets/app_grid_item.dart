@@ -92,7 +92,7 @@ class _AppGridItemState extends State<AppGridItem>
                           splashColor: Colors.transparent,
                           hoverColor: Colors.white10,
                           padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
-                          onPressed: () => _launchURL('https://google.com'),
+                          onPressed: _launchURL,
                           child: Text(
                             'Check this out',
                             style: TextStyle(
@@ -135,11 +135,11 @@ class _AppGridItemState extends State<AppGridItem>
     );
   }
 
-  Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  Future<void> _launchURL() async {
+    if (await canLaunch(widget.app.appUrl)) {
+      await launch(widget.app.appUrl);
     } else {
-      throw 'Could not launch $url';
+      throw 'Could not launch ${widget.app.appUrl}';
     }
   }
 }

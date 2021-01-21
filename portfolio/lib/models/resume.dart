@@ -1,8 +1,8 @@
 class Resume {
-  DateTime endTime;
-  String name;
-  String description;
-  String place;
+  final DateTime endTime;
+  final String name;
+  final String description;
+  final String place;
 
   Resume({this.description, this.endTime, this.place, this.name});
 

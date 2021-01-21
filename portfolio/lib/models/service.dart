@@ -1,8 +1,8 @@
 
 class Service{
-    String image;
-    String title;
-    String description;
+    final String image;
+    final String title;
+    final String description;
 
     Service(this.title,this.description,this.image);
 }
