@@ -41,11 +41,11 @@ class ResumeTabs extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _getItemsList(resumeLists.getEducationsList(), MediaQuery.of(context).size.width / 3.7, MediaQuery.of(context).size.width > 1250 ? 850 :1000),
+              _getItemsList(resumeLists.getEducationsList(), MediaQuery.of(context).size.width / 3.7, MediaQuery.of(context).size.width > 1250 ? 850 : 1000),
               const SizedBox(
                 width: 25,
               ),
-              _getItemsList(resumeLists.getExperienceList(), MediaQuery.of(context).size.width / 3.7, MediaQuery.of(context).size.width > 1250 ? 850:1000),
+              _getItemsList(resumeLists.getExperienceList(), MediaQuery.of(context).size.width / 3.7, MediaQuery.of(context).size.width > 1250 ? 850 : 1000),
             ],
           ),
         ],

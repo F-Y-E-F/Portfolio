@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../screens/service_screen.dart';
 
 class ServiceItem extends StatelessWidget {
@@ -10,11 +11,20 @@ class ServiceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
+
     final theme = Theme.of(context);
     return Container(
         margin: const EdgeInsets.only(left: 17, right: 17),
         padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 40),
-        width: MediaQuery.of(context).size.width / 5.3,
+        width: deviceType == DeviceScreenType.mobile
+            ? MediaQuery.of(context).size.width
+            : deviceType == DeviceScreenType.desktop &&
+                    MediaQuery.of(context).size.width > 1350
+                ? MediaQuery.of(context).size.width / 5.3
+                : deviceType == DeviceScreenType.tablet
+                    ? MediaQuery.of(context).size.width / 2.3
+                    : MediaQuery.of(context).size.width / 4,
         decoration: BoxDecoration(
             color: const Color(0xff202020),
             borderRadius: BorderRadius.circular(2)),
@@ -58,7 +68,8 @@ class ServiceItem extends StatelessWidget {
             FlatButton(
               focusColor: Colors.transparent,
               hoverColor: Colors.transparent,
-              onPressed: () => Navigator.of(context).pushNamed(ServiceScreen.routeName),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(ServiceScreen.routeName),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -50,7 +50,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ),
                 ResumeTabs(),
                 const SizedBox(
-                  height: 100,
+                  height: 60,
                 ),
                 AboutMe(_getTitleText),
                 _getTitleText(theme, "Get ", "In Touch",deviceType),
