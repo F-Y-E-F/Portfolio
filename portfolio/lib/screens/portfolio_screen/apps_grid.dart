@@ -1,5 +1,6 @@
 import 'package:animated_grid/animated_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../../providers/apps.dart';
 import '../../widgets/app_grid_item.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,8 @@ class _AppsGridState extends State<AppsGrid> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final apps = Provider.of<Apps>(context).apps;
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
+
     return Column(
       children: [
         Row(
@@ -31,16 +34,16 @@ class _AppsGridState extends State<AppsGrid> {
           height: 40,
         ),
         Container(
-            height: 900,
-            width: 1200,
+            height: deviceType == DeviceScreenType.desktop ? 900 : deviceType == DeviceScreenType.mobile ?  apps.length*450 : apps.length%2 == 1 ? (apps.length+1)*450/2 : apps.length*450/2,
+            width: deviceType == DeviceScreenType.desktop ? 1200: MediaQuery.of(context).size.width,
             child: AnimatedGrid(
-              height: 900,
-              width: 1200,
+              height: deviceType == DeviceScreenType.desktop ? 900 : deviceType == DeviceScreenType.mobile ? apps.length*450 : apps.length%2 == 1 ? (apps.length+1)*450/2 : apps.length*450/2,
+              width: deviceType == DeviceScreenType.desktop ? 1200 : MediaQuery.of(context).size.width,
               keys: apps,
-              cellRowNum: 2,
-              cellColNum: 3,
-              scrollDirection: Axis.horizontal,
-              sortOrder: SortOrder.rightToLeft,
+              cellRowNum: deviceType == DeviceScreenType.desktop ? 2 : deviceType == DeviceScreenType.mobile ? 6 : 3,
+              cellColNum: deviceType == DeviceScreenType.desktop ? 3 : deviceType == DeviceScreenType.mobile ? 1 : 2 ,
+              scrollDirection: deviceType == DeviceScreenType.desktop ? Axis.horizontal : Axis.vertical,
+              sortOrder:  deviceType == DeviceScreenType.mobile ? SortOrder.topToBottom :  SortOrder.rightToLeft,
               builder: (context, index, _) => AppGridItem(apps[index]),
             )),
       ],

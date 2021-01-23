@@ -33,6 +33,7 @@ class _WelcomeImageState extends State<WelcomeImage>
 
   @override
   Widget build(BuildContext context) {
+    var deviceType = getDeviceType(MediaQuery.of(context).size);
     final theme = Theme.of(context);
     final mediaQuery = MediaQuery.of(context);
     return Container(
@@ -62,7 +63,7 @@ class _WelcomeImageState extends State<WelcomeImage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 160,
                 ),
                 Text(
@@ -70,12 +71,12 @@ class _WelcomeImageState extends State<WelcomeImage>
                   style: theme.textTheme.headline1.copyWith(
                       fontWeight: FontWeight.w300,
                       fontFamily: 'Lato',
-                      fontSize: 64),
+                      fontSize: deviceType == DeviceScreenType.desktop ? 64 : 48),
                 ),
                 Text(
                   "Kacper Wojak",
                   style: theme.textTheme.headline1
-                      .copyWith(fontFamily: 'Lato', fontSize: 64),
+                      .copyWith(fontFamily: 'Lato', fontSize: deviceType == DeviceScreenType.desktop ? 64 : 48),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -84,7 +85,7 @@ class _WelcomeImageState extends State<WelcomeImage>
                 Text(
                   "AND THIS IS MY PORTFOLIO",
                   style: theme.textTheme.headline4.copyWith(
-                      letterSpacing: 2.0, color: Colors.white.withOpacity(0.8)),
+                      letterSpacing: 2.0, color: Colors.white.withOpacity(0.8), fontSize: deviceType == DeviceScreenType.desktop ? 20 : 16),
                 )
               ],
             ),
@@ -141,7 +142,7 @@ class _WelcomeImageState extends State<WelcomeImage>
             child: Text(
               title,
               style: TextStyle(
-                  color: const Color(0xff202020),
+                  color: const Color(0xff323232),
                   letterSpacing: 2.0,
                   fontFamily: 'Lato',
                   fontSize: 16),
@@ -169,7 +170,7 @@ class _WelcomeImageState extends State<WelcomeImage>
                     horizontal: 12, vertical: 0),
                 icon: Icon(
                   Icons.menu,
-                  color: Colors.black,
+                  color: Colors.grey[700],
                 ),
                 onPressed: () {
                   _isMenuOpen

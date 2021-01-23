@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../../helpers/launch_website.dart';
 import '../../helpers/service_list.dart';
 import '../../widgets/service_Item.dart';
@@ -8,6 +9,7 @@ class AboutMe extends StatelessWidget {
   AboutMe(this._getTitleText);
   @override
   Widget build(BuildContext context) {
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
     final theme = Theme.of(context);
     return Column(
       children: [
@@ -25,7 +27,7 @@ class AboutMe extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _getTitleText(theme, "About ", "Me"),
+                _getTitleText(theme, "About ", "Me",deviceType),
                 const SizedBox(
                   height: 30,
                 ),
@@ -101,7 +103,7 @@ class AboutMe extends StatelessWidget {
         const SizedBox(
           height: 120,
         ),
-        _getTitleText(theme, "My ", "Services"),
+        _getTitleText(theme, "My ", "Services",deviceType),
         const SizedBox(
           height: 60,
         ),

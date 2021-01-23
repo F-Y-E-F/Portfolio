@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import './portfolio_screen/about_me.dart';
 import './portfolio_screen/apps_grid.dart';
 import './portfolio_screen/contact.dart';
@@ -19,6 +20,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
 
 
     return Scaffold(
@@ -34,7 +36,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 const SizedBox(
                   height: 100,
                 ),
-                _getTitleText(theme, "Featured ", "Portfolio"),
+                _getTitleText(theme, "Featured ", "Portfolio",deviceType),
                 const SizedBox(
                   height: 30,
                 ),
@@ -42,7 +44,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 const SizedBox(
                   height: 80,
                 ),
-                _getTitleText(theme, "My ", "Resume"),
+                _getTitleText(theme, "My ", "Resume",deviceType),
                 const SizedBox(
                   height: 60,
                 ),
@@ -51,7 +53,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   height: 100,
                 ),
                 AboutMe(_getTitleText),
-                _getTitleText(theme, "Get ", "In Touch"),
+                _getTitleText(theme, "Get ", "In Touch",deviceType),
                 const SizedBox(
                   height: 100,
                 ),
@@ -74,19 +76,19 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
 
   //-----------------------------| Get title 2-color text |---------------------------------
-  Widget _getTitleText(ThemeData theme, String normalText, String yellowText) =>
+  Widget _getTitleText(ThemeData theme, String normalText, String yellowText,deviceType) =>
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             normalText,
             style: theme.textTheme.headline1
-                .copyWith(fontWeight: FontWeight.w400, fontSize: 42.0),
+                .copyWith(fontWeight: FontWeight.w400, fontSize: deviceType == DeviceScreenType.desktop ? 42.0 : 36.0),
           ),
           Text(
             yellowText,
             style: theme.textTheme.headline1
-                .copyWith(fontSize: 42.0, color: theme.primaryColor),
+                .copyWith(fontSize: deviceType == DeviceScreenType.desktop ? 42.0 : 36.0, color: theme.primaryColor),
           ),
         ],
       );
