@@ -54,16 +54,20 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ),
                 AboutMe(_getTitleText),
                 _getTitleText(theme, "Get ", "In Touch",deviceType),
-                const SizedBox(
-                  height: 100,
+                SizedBox(
+                  height: deviceType == DeviceScreenType.desktop ? 100 : 60,
                 ),
                 Contact(),
                 const SizedBox(
                   height: 100,
                 ),
-                Text(
-                  "Copyright © All rights reserved | Kacper Wojak Portfolio CV",
-                  style: theme.textTheme.headline4.copyWith(color: Colors.grey),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal :20.0),
+                  child: Text(
+                    "Copyright © All rights reserved | Kacper Wojak Portfolio CV",
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.headline5.copyWith(color: Colors.grey,fontWeight: FontWeight.w400),
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
