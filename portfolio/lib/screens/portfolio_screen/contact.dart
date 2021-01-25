@@ -169,6 +169,8 @@ class Contact extends StatelessWidget {
                   border: Border.all(color: theme.primaryColor, width: 2),
                   borderRadius: BorderRadius.circular(2)),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Contact me on what you want to!",
