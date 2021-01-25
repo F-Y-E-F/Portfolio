@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import '../screens/big_photo_screen.dart';
 
 class ServiceScreen extends StatefulWidget {
   static const routeName = '/service';
@@ -151,10 +150,16 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           child: InkWell(
-                              child: Image.network(
-                            'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
-                            fit: BoxFit.fill,
-                          ),onTap: (){},),
+                            child: Image.network(
+                              'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
+                              fit: BoxFit.fill,
+                            ),
+                            onTap: () => Navigator.of(context).push(PageRouteBuilder(
+                                opaque: false,
+                                pageBuilder: (BuildContext context, _, __) => BigPhotoScreen()
+
+                            ))
+                          ),
                         ),
                         AnimatedContainer(
                           constraints: BoxConstraints(
