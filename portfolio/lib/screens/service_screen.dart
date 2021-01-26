@@ -18,7 +18,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+        padding: const EdgeInsets.fromLTRB(100, 50, 50, 50),
         child: Row(
           children: [
             Expanded(
@@ -82,55 +82,67 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'SHOW ACTIVITY CHART',
-                              style: theme.textTheme.headline4
-                                  .copyWith(letterSpacing: 2),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                size: 28,
-                                color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                'SHOW ACTIVITY CHART',
+                                style: theme.textTheme.headline4
+                                    .copyWith(letterSpacing: 2),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  isActivityChartOpen = !isActivityChartOpen;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'LATEST PROJECTS',
-                              style: theme.textTheme.headline4
-                                  .copyWith(letterSpacing: 2),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                size: 28,
-                                color: Colors.white,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  size: 28,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    isActivityChartOpen = !isActivityChartOpen;
+                                  });
+                                  if (isActivityChartOpen){
+                                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                'Click on chart to make it bigger')));
+                                  }
+
+                                },
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  isLatestProjectsOpen = !isLatestProjectsOpen;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 70,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                'LATEST PROJECTS',
+                                style: theme.textTheme.headline4
+                                    .copyWith(letterSpacing: 2),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  size: 28,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    isLatestProjectsOpen =
+                                        !isLatestProjectsOpen;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     alignment: Alignment.topRight,
                   ),
@@ -138,39 +150,71 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   Align(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AnimatedContainer(
                           constraints: BoxConstraints(
                               minHeight: isActivityChartOpen ? 200 : 0),
-                          width: 245,
+                          width: 250,
                           height: isActivityChartOpen ? 200 : 0,
                           color: isActivityChartOpen
-                              ? Colors.white
+                              ? Color(0xff181818)
                               : Colors.transparent,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           child: InkWell(
-                            child: Image.network(
-                              'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
-                              fit: BoxFit.fill,
-                            ),
-                            onTap: () => Navigator.of(context).push(PageRouteBuilder(
-                                opaque: false,
-                                pageBuilder: (BuildContext context, _, __) => BigPhotoScreen()
-
-                            ))
-                          ),
+                              child: Image.network(
+                                'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
+                                fit: BoxFit.fill,
+                              ),
+                              onTap: () => Navigator.of(context).push(
+                                  PageRouteBuilder(
+                                      opaque: false,
+                                      pageBuilder:
+                                          (BuildContext context, _, __) =>
+                                              BigPhotoScreen()))),
+                        ),
+                        const SizedBox(
+                          width: 43,
                         ),
                         AnimatedContainer(
+                          padding: const EdgeInsets.all(10),
                           constraints: BoxConstraints(
                               minHeight: isLatestProjectsOpen ? 200 : 0),
                           width: 250,
                           height: isLatestProjectsOpen ? 200 : 0,
                           color: isLatestProjectsOpen
-                              ? Colors.blue
+                              ? Color(0xff181818)
                               : Colors.transparent,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
+                          child: isLatestProjectsOpen
+                              ? Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Project 1",
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                    Divider(),
+                                    Text(
+                                      "Project 2",
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                    Divider(),
+                                    Text(
+                                      "Project 3",
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                    Divider(),
+                                    Text(
+                                      "Project 4",
+                                      style: theme.textTheme.headline5,
+                                    ),
+                                  ],
+                                )
+                              : null,
                         ),
                       ],
                     ),

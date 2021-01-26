@@ -22,7 +22,7 @@ class BigPhotoScreen extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.all(30),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.0),
+                    borderRadius: BorderRadius.circular(100.0),
                     color: theme.primaryColor,
                   ),
                   child: IconButton(
