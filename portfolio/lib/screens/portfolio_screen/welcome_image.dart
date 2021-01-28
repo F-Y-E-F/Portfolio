@@ -13,22 +13,23 @@ class WelcomeImage extends StatefulWidget {
 class _WelcomeImageState extends State<WelcomeImage>
     with TickerProviderStateMixin {
   int hovered;
+  AnimationController _controller;
+  Animation<Offset> _slideAnimation;
+  Animation<double> _opacityAnimation;
 
   var _isMenuOpen = false;
-
-  AnimationController _menuController;
-  Animation<Size> _menuAnimation;
 
   @override
   void initState() {
     super.initState();
-
-    _menuController =
+    _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _menuAnimation =
-        Tween<Size>(begin: Size(0, 0), end: Size(double.infinity, 275)).animate(
-            CurvedAnimation(parent: _menuController, curve: Curves.easeInOut));
-    _menuAnimation.addListener(() => setState(() {}));
+    _slideAnimation = Tween<Offset>(
+        begin: Offset(0, -6), end: Offset(0,0))
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    _opacityAnimation = Tween(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -122,7 +123,7 @@ class _WelcomeImageState extends State<WelcomeImage>
         ),
         onTap: () {
           widget.scrollController.animateTo(offset,
-              duration: Duration(milliseconds: 500), curve: Curves.linear);
+              duration: const Duration(milliseconds: 500), curve: Curves.linear);
         },
         onHover: (isHover) {
           setState(() => isHover ? hovered = position : hovered = -1);
@@ -132,20 +133,27 @@ class _WelcomeImageState extends State<WelcomeImage>
   Widget _getMobileMenuItem(String title, double offset) =>
       GestureDetector(
           onTap: () {
-            _menuController.reverse();
+            setState(() => _isMenuOpen = false);
+            _controller.reverse();
             widget.scrollController.animateTo(offset,
                 duration: Duration(milliseconds: 500), curve: Curves.linear);
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-            width: double.infinity,
-            child: Text(
-              title,
-              style: TextStyle(
-                  color: const Color(0xff323232),
-                  letterSpacing: 2.0,
-                  fontFamily: 'Lato',
-                  fontSize: 16),
+          child: FadeTransition(
+            opacity: _opacityAnimation,
+            child: SlideTransition(
+              position: _slideAnimation,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                width: double.infinity,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      color: const Color(0xff323232),
+                      letterSpacing: 2.0,
+                      fontFamily: 'Lato',
+                      fontSize: 16),
+                ),
+              ),
             ),
           ));
 
@@ -173,20 +181,21 @@ class _WelcomeImageState extends State<WelcomeImage>
                   color: Colors.grey[700],
                 ),
                 onPressed: () {
-                  _isMenuOpen
-                      ? _menuController.reverse()
-                      : _menuController.forward();
-                  _isMenuOpen = !_isMenuOpen;
+                  setState(()=>_isMenuOpen = ! _isMenuOpen);
+                  if(_isMenuOpen) _controller.forward();
+                  else _controller.reverse();
                 },
               ),
             ),
           ),
-          Container(
-            height: _menuAnimation.value.height,
+          AnimatedContainer(
+            height: _isMenuOpen ? 275 : 0,
             constraints:
-            BoxConstraints(minHeight: _menuAnimation.value.height),
+            BoxConstraints(minHeight: _isMenuOpen? 275 : 0),
             color: Colors.white,
             width: double.infinity,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
             child: Column(
               children: [
                 const SizedBox(height: 8,),
