@@ -12,6 +12,7 @@ class WelcomeImage extends StatefulWidget {
 
 class _WelcomeImageState extends State<WelcomeImage>
     with TickerProviderStateMixin {
+
   int hovered;
   AnimationController _controller;
   Animation<Offset> _slideAnimation;
@@ -56,8 +57,8 @@ class _WelcomeImageState extends State<WelcomeImage>
                 ),
                 alignment: Alignment.topCenter,
               ),
-              tablet:_mobileAndTabletMenu(),
-              mobile:_mobileAndTabletMenu()
+              tablet:_mobileAndTabletMenu(deviceType),
+              mobile:_mobileAndTabletMenu(deviceType)
           ),
           Align(
             alignment: Alignment.center,
@@ -157,7 +158,7 @@ class _WelcomeImageState extends State<WelcomeImage>
             ),
           ));
 
-  Widget _mobileAndTabletMenu() =>
+  Widget _mobileAndTabletMenu(DeviceScreenType deviceType) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,10 +201,10 @@ class _WelcomeImageState extends State<WelcomeImage>
               children: [
                 const SizedBox(height: 8,),
                 _getMobileMenuItem('HOME', 0),
-                _getMobileMenuItem('PORTFOLIO', 1050),
-                _getMobileMenuItem('RESUME', 2250),
-                _getMobileMenuItem('ABOUT', 3300),
-                _getMobileMenuItem('CONTACT', 5600)
+                _getMobileMenuItem('PORTFOLIO',1050),
+                _getMobileMenuItem('RESUME', deviceType == DeviceScreenType.tablet ? 2700 : 4000),
+                _getMobileMenuItem('ABOUT', deviceType == DeviceScreenType.tablet ? 3900 : 6000),
+                _getMobileMenuItem('CONTACT', deviceType == DeviceScreenType.tablet ? 6150 : 8500)
               ],
             ),
           )

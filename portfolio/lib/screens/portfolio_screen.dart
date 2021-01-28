@@ -52,7 +52,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 const SizedBox(
                   height: 60,
                 ),
-                AboutMe(_getTitleText),
+                AboutMe(_getTitleText,scrollController),
                 _getTitleText(theme, "Get ", "In Touch",deviceType),
                 SizedBox(
                   height: deviceType == DeviceScreenType.desktop ? 100 : 60,

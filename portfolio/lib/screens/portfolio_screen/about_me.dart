@@ -6,8 +6,9 @@ import '../../widgets/service_Item.dart';
 
 class AboutMe extends StatelessWidget {
   final Function _getTitleText;
+  final ScrollController _scrollController;
 
-  AboutMe(this._getTitleText);
+  AboutMe(this._getTitleText, this._scrollController);
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +139,14 @@ class AboutMe extends StatelessWidget {
                   FlatButton(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 40, vertical: 19),
-                    onPressed: () {},
+                    onPressed: () => _scrollController.animateTo(
+                        deviceType == DeviceScreenType.desktop
+                            ? 4600
+                            : deviceType == DeviceScreenType.tablet
+                                ? 6150
+                                : 8500,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut),
                     child: Text(
                       'HIRE ME',
                       style: TextStyle(
