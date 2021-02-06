@@ -1,9 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/helpers/launch_website.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../helpers/social_media_list.dart';
 import '../../widgets/social_media_item.dart';
 
 class Contact extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  final Map _emailData = Map<String, String>();
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -64,16 +70,24 @@ class Contact extends StatelessWidget {
           DeviceScreenType deviceType) =>
       Container(
         width: deviceType == DeviceScreenType.desktop
-            ? mediaQuery.size.width > 1500 ? mediaQuery.size.width / 3.7 : mediaQuery.size.width / 3
+            ? mediaQuery.size.width > 1500
+                ? mediaQuery.size.width / 3.7
+                : mediaQuery.size.width / 3
             : mediaQuery.size.width,
         child: TextFormField(
+          keyboardType: hint == 'phone'
+              ? TextInputType.phone
+              : hint == 'email'
+                  ? TextInputType.emailAddress
+                  : TextInputType.text,
+          onChanged: (val) => _emailData[hint] = val,
           decoration: InputDecoration(
               hintText: hint,
               hintStyle: theme.textTheme.headline4
                   .copyWith(fontSize: 16, color: Colors.grey),
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              fillColor: Color(0xFF202020),
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              fillColor:const Color(0xFF202020),
               filled: true),
           style: theme.textTheme.headline4.copyWith(fontSize: 15),
           cursorColor: theme.primaryColor,
@@ -84,6 +98,7 @@ class Contact extends StatelessWidget {
   Widget _getContactFormContent(MediaQueryData mediaQuery, ThemeData theme,
           DeviceScreenType deviceType) =>
       Form(
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,9 +109,12 @@ class Contact extends StatelessWidget {
             Container(
                 margin: EdgeInsets.only(top: 10),
                 width: deviceType == DeviceScreenType.desktop
-                    ? mediaQuery.size.width > 1500 ? mediaQuery.size.width / 3.7 : mediaQuery.size.width / 3
+                    ? mediaQuery.size.width > 1500
+                        ? mediaQuery.size.width / 3.7
+                        : mediaQuery.size.width / 3
                     : mediaQuery.size.width,
-                child: TextField(
+                child: TextFormField(
+                  onChanged: (val) => _emailData['content'] = val,
                   textInputAction: TextInputAction.newline,
                   keyboardType: TextInputType.multiline,
                   minLines: 10,
@@ -117,7 +135,12 @@ class Contact extends StatelessWidget {
             ),
             FlatButton(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
-              onPressed: () {},
+              onPressed: () async {
+                final email =
+                    "mailto:kacperwojak17@gmail.com?subject=${_emailData['name'] + "_Portfolio"}&body=${_emailData['content'] + '_' + 'phone:' + _emailData['phone'] + '_' + 'email:' + _emailData['email']}";
+                print(email);
+                LaunchWebsite().openNewWebsiteCard(email);
+              },
               child: Text(
                 'SEND MESSAGE',
                 style: TextStyle(
@@ -142,7 +165,9 @@ class Contact extends StatelessWidget {
             ? const EdgeInsets.only(left: 25)
             : null,
         width: deviceType == DeviceScreenType.desktop
-            ? mediaQuery.size.width > 1500 ? mediaQuery.size.width / 3.7 : mediaQuery.size.width / 3
+            ? mediaQuery.size.width > 1500
+                ? mediaQuery.size.width / 3.7
+                : mediaQuery.size.width / 3
             : mediaQuery.size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -175,7 +200,7 @@ class Contact extends StatelessWidget {
                   Text(
                     "Contact me on what you want to!",
                     style: theme.textTheme.headline4,
-                    textAlign:  TextAlign.center,
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 5,
@@ -183,7 +208,7 @@ class Contact extends StatelessWidget {
                   Text(
                     "If you want to get my full CV",
                     style: theme.textTheme.headline5,
-                    textAlign:  TextAlign.center,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -197,11 +222,13 @@ class Contact extends StatelessWidget {
       Container(
         padding: const EdgeInsets.only(left: 5),
         width: deviceType == DeviceScreenType.desktop
-            ? mediaQuery.size.width > 1500 ? mediaQuery.size.width / 3.7 : mediaQuery.size.width / 3
+            ? mediaQuery.size.width > 1500
+                ? mediaQuery.size.width / 3.7
+                : mediaQuery.size.width / 3
             : mediaQuery.size.width,
         child: Text(
           title,
-          textAlign:  TextAlign.center,
+          textAlign: TextAlign.center,
           style:
               theme.textTheme.headline2.copyWith(fontWeight: FontWeight.w400),
         ),

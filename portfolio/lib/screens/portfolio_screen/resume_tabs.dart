@@ -90,11 +90,11 @@ class ResumeTabs extends StatelessWidget {
       children: [
         _getTitleText(theme,'Education'),
         const SizedBox(height: 25,),
-        _getItemsList(resumeLists.getEducationsList(), MediaQuery.of(context).size.width -70, 800),
+        _getItemsList(resumeLists.getEducationsList(), MediaQuery.of(context).size.width - 70, 900),
         const SizedBox(height: 40,),
         _getTitleText(theme,'Experience'),
         const SizedBox(height: 25,),
-        _getItemsList(resumeLists.getExperienceList(), MediaQuery.of(context).size.width -70, 800)
+        _getItemsList(resumeLists.getExperienceList(), MediaQuery.of(context).size.width -70, 900)
       ],
     );
   }

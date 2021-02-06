@@ -60,7 +60,7 @@ class AboutMe extends StatelessWidget {
                   .map((serviceItem) => Container(
                         child: serviceItem,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 15),
+                            horizontal: 5, vertical: 15),
                       ))
                   .toList()),
           tablet: Wrap(
@@ -137,21 +137,21 @@ class AboutMe extends StatelessWidget {
               Row(
                 children: [
                   FlatButton(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 19),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 19),
                     onPressed: () => _scrollController.animateTo(
                         deviceType == DeviceScreenType.desktop
                             ? 4600
                             : deviceType == DeviceScreenType.tablet
                                 ? 6150
                                 : 8500,
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut),
                     child: Text(
                       'HIRE ME',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: deviceType == DeviceScreenType.mobile ? 14: 16,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Lato',
                           letterSpacing: 1.0),
@@ -164,15 +164,15 @@ class AboutMe extends StatelessWidget {
                     width: 10,
                   ),
                   FlatButton(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 19),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 19),
                     onPressed: () async => await LaunchWebsite()
                         .openNewWebsiteCard('https://github.com/F-Y-E-F'),
                     child: Text(
                       'VISIT MY GITHUB',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: deviceType == DeviceScreenType.mobile ? 14: 16,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Lato',
                           letterSpacing: 1.0),
