@@ -9,9 +9,25 @@ class ServiceScreen extends StatefulWidget {
   _ServiceScreenState createState() => _ServiceScreenState();
 }
 
-class _ServiceScreenState extends State<ServiceScreen> {
+class _ServiceScreenState extends State<ServiceScreen>
+    with TickerProviderStateMixin {
   bool isActivityChartOpen = false;
   bool isLatestProjectsOpen = false;
+  AnimationController _controller;
+  Animation<Offset> _slideAnimation;
+  Animation<double> _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _slideAnimation = Tween<Offset>(begin: Offset(0, -0.1), end: Offset(0, 0))
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    _opacityAnimation = Tween(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,40 +184,28 @@ class _ServiceScreenState extends State<ServiceScreen> {
       );
 
   Widget _getLatestProjects(ThemeData theme) => AnimatedContainer(
-        padding: const EdgeInsets.all(10),
-        constraints: BoxConstraints(minHeight: isLatestProjectsOpen ? 200 : 0),
-        width: 250,
-        height: isLatestProjectsOpen ? 200 : 0,
-        color: isLatestProjectsOpen ? Color(0xff181818) : Colors.transparent,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-        child: isLatestProjectsOpen
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Project 1",
-                    style: theme.textTheme.headline5,
-                  ),
-                  Divider(),
-                  Text(
-                    "Project 2",
-                    style: theme.textTheme.headline5,
-                  ),
-                  Divider(),
-                  Text(
-                    "Project 3",
-                    style: theme.textTheme.headline5,
-                  ),
-                  Divider(),
-                  Text(
-                    "Project 4",
-                    style: theme.textTheme.headline5,
-                  ),
-                ],
-              )
-            : null,
-      );
+      padding: const EdgeInsets.all(10),
+      constraints: BoxConstraints(minHeight: isLatestProjectsOpen ? 200 : 0),
+      width: 250,
+      height: isLatestProjectsOpen ? 200 : 0,
+      color: isLatestProjectsOpen ? Color(0xff181818) : Colors.transparent,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: FadeTransition(
+          opacity: _opacityAnimation,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _getLatestProjectsText(theme,"Project 1"),
+              _getLatestProjectsText(theme,"Project 2"),
+              _getLatestProjectsText(theme,"Project 3"),
+              _getLatestProjectsText(theme,"Project 4"),
+            ],
+          ),
+        ),
+      ));
 
   Widget _nameBox(ThemeData theme) => Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -260,14 +264,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
             style: theme.textTheme.headline4.copyWith(letterSpacing: 2),
           ),
           IconButton(
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-              size: 28,
-              color: Colors.white,
-            ),
-            onPressed: () =>
-                setState(() => isLatestProjectsOpen = !isLatestProjectsOpen),
-          ),
+              icon: Icon(
+                Icons.keyboard_arrow_down,
+                size: 28,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                setState(() => isLatestProjectsOpen = !isLatestProjectsOpen);
+                isLatestProjectsOpen
+                    ? _controller.forward()
+                    : _controller.reverse();
+              }),
         ],
       );
 
@@ -306,4 +313,20 @@ class _ServiceScreenState extends State<ServiceScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       );
+
+  Widget _getLatestProjectsText(ThemeData theme,String text) => FadeTransition(
+    opacity: _opacityAnimation,
+    child: SlideTransition(
+      position: _slideAnimation,
+      child: Column(
+        children: [
+          Text(
+            text,
+            style: theme.textTheme.headline5,
+          ),
+          Divider(),
+        ],
+      ),
+    ),
+  );
 }

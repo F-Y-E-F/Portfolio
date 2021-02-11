@@ -6,8 +6,14 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../helpers/social_media_list.dart';
 import '../../widgets/social_media_item.dart';
 
-class Contact extends StatelessWidget {
+class Contact extends StatefulWidget {
+  @override
+  _ContactState createState() => _ContactState();
+}
+
+class _ContactState extends State<Contact> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+
   final Map _emailData = Map<String, String>();
 
   @override
