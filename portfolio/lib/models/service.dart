@@ -2,7 +2,9 @@
 class Service{
     final String image;
     final String title;
-    final String description;
+    final String secondTitle;
+    final String longDescription;
+    final String shortDescription;
 
-    Service(this.title,this.description,this.image);
+    Service(this.title,this.secondTitle,this.shortDescription,this.longDescription,this.image);
 }

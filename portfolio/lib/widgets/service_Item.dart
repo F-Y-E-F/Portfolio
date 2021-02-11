@@ -5,9 +5,11 @@ import '../screens/service_screen.dart';
 class ServiceItem extends StatelessWidget {
   final String image;
   final String title;
-  final String description;
+  final String secondTitle;
+  final String shortDescription;
+  final String longDescription;
 
-  ServiceItem(this.title, this.description, this.image);
+  ServiceItem(this.title,this.secondTitle, this.shortDescription, this.longDescription, this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,11 @@ class ServiceItem extends StatelessWidget {
                   color: theme.primaryColor,
                   borderRadius: BorderRadius.circular(100)),
               padding: const EdgeInsets.all(30),
-              child: Image.network(
-                image,
+              child: Hero(
+                tag: title,
+                child: Image.network(
+                  image,
+                ),
               ),
             ),
             const SizedBox(
@@ -55,7 +60,7 @@ class ServiceItem extends StatelessWidget {
               height: 20,
             ),
             Text(
-              description,
+              shortDescription,
               style: theme.textTheme.headline6.copyWith(
                   color: const Color(0xff8f8f8f),
                   fontSize: 16,
@@ -69,7 +74,12 @@ class ServiceItem extends StatelessWidget {
               focusColor: Colors.transparent,
               hoverColor: Colors.transparent,
               onPressed: () =>
-                  Navigator.of(context).pushNamed(ServiceScreen.routeName),
+                  Navigator.of(context).pushNamed(ServiceScreen.routeName,arguments: {
+                    "title":title,
+                    "secondTitle":secondTitle,
+                    "description":longDescription,
+                    "image":image,
+                  }),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

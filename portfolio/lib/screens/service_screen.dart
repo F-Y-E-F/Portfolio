@@ -31,6 +31,8 @@ class _ServiceScreenState extends State<ServiceScreen>
 
   @override
   Widget build(BuildContext context) {
+    final service =
+        ModalRoute.of(context).settings.arguments as Map<String, String>;
     final theme = Theme.of(context);
     final deviceType = getDeviceType(MediaQuery.of(context).size);
 
@@ -45,16 +47,15 @@ class _ServiceScreenState extends State<ServiceScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _nameBox(theme),
+                    _nameBox(theme, service['image'], service['title']),
                     const SizedBox(
                       height: 200,
                     ),
-                    _getRichText(theme, deviceType),
+                    _getRichText(theme, deviceType, service['title'],service["secondTitle"]),
                     const SizedBox(
                       height: 30,
                     ),
-                    Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam feugiat dui at felis lacinia sollicitudin. Pellentesque massa felis, egestas id nisl at, dignissim pellentesque lectus. Proin porttitor mi vel sapien pellentesque, sed congue est fermentum. Integer nisi sapien, ultricies vel lobortis et, laoreet at justo.',
+                    Text(service['description'],
                         style: theme.textTheme.headline4.copyWith(
                             fontWeight: FontWeight.w300,
                             letterSpacing: 1,
@@ -123,11 +124,11 @@ class _ServiceScreenState extends State<ServiceScreen>
                   const SizedBox(
                     height: 50,
                   ),
-                  _nameBox(theme),
+                  _nameBox(theme, service['image'], service['title']),
                   const SizedBox(
                     height: 120,
                   ),
-                  _getRichText(theme, deviceType),
+                  _getRichText(theme, deviceType, service['title'],service["secondTitle"]),
                   const SizedBox(
                     height: 30,
                   ),
@@ -198,21 +199,24 @@ class _ServiceScreenState extends State<ServiceScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _getLatestProjectsText(theme,"Project 1"),
-              _getLatestProjectsText(theme,"Project 2"),
-              _getLatestProjectsText(theme,"Project 3"),
-              _getLatestProjectsText(theme,"Project 4"),
+              _getLatestProjectsText(theme, "Project 1"),
+              _getLatestProjectsText(theme, "Project 2"),
+              _getLatestProjectsText(theme, "Project 3"),
+              _getLatestProjectsText(theme, "Project 4"),
             ],
           ),
         ),
       ));
 
-  Widget _nameBox(ThemeData theme) => Row(
+  Widget _nameBox(ThemeData theme, String imageUrl,String title) => Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.network(
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/1024px-Kotlin-logo.svg.png',
-            width: 90,
+          Hero(
+            tag: title,
+            child: Image.network(
+              imageUrl,
+              width: 90,
+            ),
           ),
           SizedBox(
             width: 10,
@@ -224,7 +228,9 @@ class _ServiceScreenState extends State<ServiceScreen>
         ],
       );
 
-  Widget _getRichText(ThemeData theme, DeviceScreenType deviceType) => Column(
+  Widget _getRichText(
+          ThemeData theme, DeviceScreenType deviceType, String title,String secondTitle) =>
+      Column(
         children: [
           RichText(
             textAlign: deviceType == DeviceScreenType.desktop
@@ -236,7 +242,7 @@ class _ServiceScreenState extends State<ServiceScreen>
                     .copyWith(fontSize: 80, height: 0.5),
                 children: [
                   TextSpan(
-                    text: 'KOTLIN',
+                    text: title.split(" ")[0].toUpperCase(),
                     style: theme.textTheme.headline1.copyWith(
                         fontSize:
                             deviceType == DeviceScreenType.desktop ? 80 : 50,
@@ -245,8 +251,8 @@ class _ServiceScreenState extends State<ServiceScreen>
                   ),
                   TextSpan(
                     text: deviceType == DeviceScreenType.desktop
-                        ? ' SUPPORT\nAND FULL APPS'
-                        : '\nSUPPORT\nAND FULL APPS',
+                        ? ' ${title.split(" ")[1].toUpperCase()}\n${secondTitle.toUpperCase()}'
+                        : "\n${title.split(" ")[1].toUpperCase()}\n${secondTitle.toUpperCase()}",
                     style: theme.textTheme.headline1.copyWith(
                         fontSize:
                             deviceType == DeviceScreenType.desktop ? 80 : 50,
@@ -314,19 +320,19 @@ class _ServiceScreenState extends State<ServiceScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       );
 
-  Widget _getLatestProjectsText(ThemeData theme,String text) => FadeTransition(
-    opacity: _opacityAnimation,
-    child: SlideTransition(
-      position: _slideAnimation,
-      child: Column(
-        children: [
-          Text(
-            text,
-            style: theme.textTheme.headline5,
+  Widget _getLatestProjectsText(ThemeData theme, String text) => FadeTransition(
+        opacity: _opacityAnimation,
+        child: SlideTransition(
+          position: _slideAnimation,
+          child: Column(
+            children: [
+              Text(
+                text,
+                style: theme.textTheme.headline5,
+              ),
+              Divider(),
+            ],
           ),
-          Divider(),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 }

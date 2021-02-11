@@ -194,6 +194,6 @@ class AboutMe extends StatelessWidget {
   List<Widget> _getServiceList() => ServiceList()
       .getServiceList()
       .map((service) =>
-          ServiceItem(service.title, service.description, service.image))
+          ServiceItem(service.title,service.secondTitle, service.shortDescription, service.longDescription, service.image))
       .toList();
 }
