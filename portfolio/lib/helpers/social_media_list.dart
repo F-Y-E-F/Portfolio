@@ -3,31 +3,31 @@ import '../models/social_media.dart';
 class SocialMediaList {
   List<SocialMedia> getFirstLine() => [
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/facebook.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/linkedin.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/reddit.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/github.png',
             '')
       ];
 
   List<SocialMedia> getSecondLine() => [
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/twitter.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/instagram.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/gmail.png',
             ''),
         SocialMedia(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+            'assets/images/discord.png',
             '')
       ];
 }

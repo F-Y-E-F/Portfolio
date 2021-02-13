@@ -24,9 +24,10 @@ class SocialMediaItem extends StatelessWidget {
           decoration: BoxDecoration(
               color: const Color(0xff202020),
               borderRadius: BorderRadius.circular(100)),
-          child: Image.network(
-            'https://icons-for-free.com/iconfiles/png/512/facebook+logo+logo+website+icon-1320190502625926346.png',
+          child: Image.asset(
+            image,
             color: theme.primaryColor,
+            scale: 15,
           ),
         ),
       ),

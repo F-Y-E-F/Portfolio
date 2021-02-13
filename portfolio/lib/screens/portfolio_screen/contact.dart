@@ -139,7 +139,7 @@ class _ContactState extends State<Contact> {
               height: 40,
             ),
             FlatButton(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
+              padding: EdgeInsets.symmetric(horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 25),
               onPressed: () async {
                 final email =
                     "mailto:kacperwojak17@gmail.com?subject=${_emailData['name'] + "_Portfolio"}&body=${_emailData['content'] + '_' + 'phone:' + _emailData['phone'] + '_' + 'email:' + _emailData['email']}";
@@ -150,7 +150,7 @@ class _ContactState extends State<Contact> {
                 'SEND MESSAGE',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: deviceType == DeviceScreenType.mobile ? 15: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: 'Lato',
                     letterSpacing: 1.0),
