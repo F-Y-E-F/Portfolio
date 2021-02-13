@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/helpers/launch_website.dart';
 
 class SocialMediaItem extends StatelessWidget {
 
@@ -13,7 +14,7 @@ class SocialMediaItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 7,right: 7,bottom: 14),
       child: InkWell(
-        onTap: () {},
+        onTap: () => LaunchWebsite().openNewWebsiteCard(url),
         splashColor: theme.primaryColor.withOpacity(0.3),
         highlightColor: theme.primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(100),
