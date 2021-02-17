@@ -175,7 +175,7 @@ class _ServiceScreenState extends State<ServiceScreen>
         curve: Curves.easeInOut,
         child: InkWell(
             child: Image.network(
-              'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
+              'https://flutter.dev/assets/flutter-lockup-1caf6476beed76adec3c477586da54de6b552b2f42108ec5bc68dc63bae2df75.png',
               fit: BoxFit.fill,
             ),
             onTap: () => Navigator.of(context).push(PageRouteBuilder(
@@ -213,7 +213,7 @@ class _ServiceScreenState extends State<ServiceScreen>
         children: [
           Hero(
             tag: title,
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               width: 90,
             ),

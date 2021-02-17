@@ -34,7 +34,7 @@ class _AppsGridState extends State<AppsGrid> {
           height: 40,
         ),
         Container(
-            height: deviceType == DeviceScreenType.desktop ? 900 : deviceType == DeviceScreenType.mobile ?  apps.length*450 : apps.length%2 == 1 ? (apps.length+1)*450/2 : apps.length*450/2,
+            height: deviceType == DeviceScreenType.desktop ? 900 : deviceType == DeviceScreenType.mobile ?  apps.length*450.0 : apps.length%2 == 1 ? (apps.length+1)*450.0/2.0 : apps.length*450.0/2.0,
             width: deviceType == DeviceScreenType.desktop ? 1200: MediaQuery.of(context).size.width,
             child: AnimatedGrid(
               height: deviceType == DeviceScreenType.desktop ? 900 : deviceType == DeviceScreenType.mobile ? apps.length*450 : apps.length%2 == 1 ? (apps.length+1)*450/2 : apps.length*450/2,

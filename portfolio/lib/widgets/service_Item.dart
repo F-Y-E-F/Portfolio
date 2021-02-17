@@ -41,7 +41,7 @@ class ServiceItem extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Hero(
                 tag: title,
-                child: Image.network(
+                child: Image.asset(
                   image,
                 ),
               ),

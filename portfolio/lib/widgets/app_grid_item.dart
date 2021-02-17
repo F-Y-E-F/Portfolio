@@ -92,7 +92,7 @@ class _AppGridItemState extends State<AppGridItem>
                           splashColor: Colors.transparent,
                           hoverColor: Colors.white10,
                           padding:const  EdgeInsets.symmetric(horizontal: 40,vertical: 20),
-                          onPressed: () async => await LaunchWebsite().openNewWebsiteCard('https://google.com'),
+                          onPressed: () async => await LaunchWebsite().openNewWebsiteCard(widget.app.appUrl),
                           child: Text(
                             'Check this out',
                             style: TextStyle(

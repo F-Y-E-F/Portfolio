@@ -30,6 +30,21 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+  <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBf3Cf7cy1hXdwxsUDkr7vNIyldfEO2X5U",
+    authDomain: "portfolio-cd872.firebaseapp.com",
+    projectId: "portfolio-cd872",
+    storageBucket: "portfolio-cd872.appspot.com",
+    messagingSenderId: "759504021057",
+    appId: "1:759504021057:web:f2143d3fe6a4b9fd1248c0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
