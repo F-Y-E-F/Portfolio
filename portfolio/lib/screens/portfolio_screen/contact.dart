@@ -4,6 +4,7 @@ import 'package:portfolio/helpers/launch_website.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../../helpers/social_media_list.dart';
 import '../../widgets/social_media_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Contact extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _ContactState extends State<Contact> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final Map _emailData = Map<String, String>();
-
+  final CollectionReference firestore = FirebaseFirestore.instance.collection('emails');
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -141,10 +142,13 @@ class _ContactState extends State<Contact> {
             FlatButton(
               padding: EdgeInsets.symmetric(horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 25),
               onPressed: () async {
-                final email =
-                    "mailto:kacperwojak17@gmail.com?subject=${_emailData['name'] + "_Portfolio"}&body=${_emailData['content'] + '_' + 'phone:' + _emailData['phone'] + '_' + 'email:' + _emailData['email']}";
-                print(email);
-                LaunchWebsite().openNewWebsiteCard(email);
+                firestore.add({
+                  'name':_emailData['name'],
+                  'email':_emailData['email'],
+                  'phone':_emailData['phone'],
+                  'content':_emailData['content']
+                }).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your mail has been sent")))).catchError((e)=>print(e));
+
               },
               child: Text(
                 'SEND MESSAGE',
