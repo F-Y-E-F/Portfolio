@@ -136,9 +136,16 @@ class AboutMe extends StatelessWidget {
               ),
               Row(
                 children: [
-                  FlatButton(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 19),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              deviceType == DeviceScreenType.mobile ? 30 : 40,
+                          vertical: 19),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100)),
+                      backgroundColor: theme.primaryColor,
+                    ),
                     onPressed: () => _scrollController.animateTo(
                         deviceType == DeviceScreenType.desktop
                             ? 4600
@@ -151,35 +158,38 @@ class AboutMe extends StatelessWidget {
                       'HIRE ME',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: deviceType == DeviceScreenType.mobile ? 14: 16,
+                          fontSize:
+                              deviceType == DeviceScreenType.mobile ? 14 : 16,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Lato',
                           letterSpacing: 1.0),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100)),
-                    color: theme.primaryColor,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  FlatButton(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 19),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              deviceType == DeviceScreenType.mobile ? 30 : 40,
+                          vertical: 19),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100)),
+                      backgroundColor: const Color(0xff8f8f8f),
+                    ),
                     onPressed: () async => await LaunchWebsite()
                         .openNewWebsiteCard('https://github.com/F-Y-E-F'),
                     child: Text(
                       'VISIT MY GITHUB',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: deviceType == DeviceScreenType.mobile ? 14: 16,
+                          fontSize:
+                              deviceType == DeviceScreenType.mobile ? 14 : 16,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Lato',
                           letterSpacing: 1.0),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100)),
-                    color: const Color(0xff8f8f8f),
                   )
                 ],
               ),
@@ -193,7 +203,7 @@ class AboutMe extends StatelessWidget {
 
   List<Widget> _getServiceList() => ServiceList()
       .getServiceList()
-      .map((service) =>
-          ServiceItem(service.title,service.secondTitle, service.shortDescription, service.longDescription, service.image))
+      .map((service) => ServiceItem(service.title, service.secondTitle,
+          service.shortDescription, service.longDescription, service.image))
       .toList();
 }

@@ -139,15 +139,20 @@ class _ContactState extends State<Contact> {
             const SizedBox(
               height: 40,
             ),
-            FlatButton(
-              padding: EdgeInsets.symmetric(horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 25),
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: deviceType == DeviceScreenType.mobile ? 30:40, vertical: 25),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100)),
+                backgroundColor: theme.primaryColor,
+              ),
               onPressed: () async {
                 firestore.add({
                   'name':_emailData['name'],
                   'email':_emailData['email'],
                   'phone':_emailData['phone'],
                   'content':_emailData['content']
-                }).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your mail has been sent")))).catchError((e)=>print(e));
+                }).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your mail has been sent")))).catchError((e) => print(e));
 
               },
               child: Text(
@@ -159,9 +164,6 @@ class _ContactState extends State<Contact> {
                     fontFamily: 'Lato',
                     letterSpacing: 1.0),
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)),
-              color: theme.primaryColor,
             ),
           ],
         ),
