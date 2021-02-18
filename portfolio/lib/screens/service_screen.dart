@@ -40,7 +40,7 @@ class _ServiceScreenState extends State<ServiceScreen>
       backgroundColor: theme.backgroundColor,
       body: ScreenTypeLayout(
         desktop: Padding(
-          padding: EdgeInsets.fromLTRB(100, 50, 50, 0),
+          padding: const EdgeInsets.fromLTRB(100, 50, 50, 0),
           child: Row(
             children: [
               Expanded(
@@ -48,10 +48,12 @@ class _ServiceScreenState extends State<ServiceScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _nameBox(theme, service['image'], service['title']),
-                    const SizedBox(
-                      height: 200,
+                    SizedBox(
+                      height:
+                          MediaQuery.of(context).size.width > 1700 ? 200 : 120,
                     ),
-                    _getRichText(theme, deviceType, service['title'],service["secondTitle"]),
+                    _getRichText(theme, deviceType, service['title'],
+                        service["secondTitle"]),
                     const SizedBox(
                       height: 30,
                     ),
@@ -60,7 +62,7 @@ class _ServiceScreenState extends State<ServiceScreen>
                             fontWeight: FontWeight.w300,
                             letterSpacing: 1,
                             fontSize: 18,
-                            height: 1.8))
+                            height: 1.8)),
                   ],
                 ),
               ),
@@ -105,7 +107,9 @@ class _ServiceScreenState extends State<ServiceScreen>
                         duration: Duration(milliseconds: 500),
                         child: _getFlatCheckProjectsButton(theme),
                       ),
-                      alignment: Alignment.center,
+                      alignment: MediaQuery.of(context).size.width > 1700
+                          ? Alignment.center
+                          : Alignment.topCenter,
                     )
                   ],
                 ),
@@ -128,7 +132,8 @@ class _ServiceScreenState extends State<ServiceScreen>
                   const SizedBox(
                     height: 120,
                   ),
-                  _getRichText(theme, deviceType, service['title'],service["secondTitle"]),
+                  _getRichText(theme, deviceType, service['title'],
+                      service["secondTitle"]),
                   const SizedBox(
                     height: 30,
                   ),
@@ -176,7 +181,6 @@ class _ServiceScreenState extends State<ServiceScreen>
         child: InkWell(
             child: Image.network(
               'https://wakatime.com/share/@FY/40d4f268-0834-4a91-9a39-c0796a830f12.png',
-              fit: BoxFit.fill,
             ),
             onTap: () => Navigator.of(context).push(PageRouteBuilder(
                 opaque: false,
@@ -208,7 +212,7 @@ class _ServiceScreenState extends State<ServiceScreen>
         ),
       ));
 
-  Widget _nameBox(ThemeData theme, String imageUrl,String title) => Row(
+  Widget _nameBox(ThemeData theme, String imageUrl, String title) => Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Hero(
@@ -228,8 +232,8 @@ class _ServiceScreenState extends State<ServiceScreen>
         ],
       );
 
-  Widget _getRichText(
-          ThemeData theme, DeviceScreenType deviceType, String title,String secondTitle) =>
+  Widget _getRichText(ThemeData theme, DeviceScreenType deviceType,
+          String title, String secondTitle) =>
       Column(
         children: [
           RichText(
@@ -308,16 +312,18 @@ class _ServiceScreenState extends State<ServiceScreen>
         ],
       );
 
-  Widget _getFlatCheckProjectsButton(ThemeData theme) => FlatButton(
+  Widget _getFlatCheckProjectsButton(ThemeData theme) => TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: theme.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        ),
         onPressed: () {},
         child: Text(
           'Check my projects',
           style: theme.textTheme.headline4
               .copyWith(fontWeight: FontWeight.w700, fontSize: 17),
         ),
-        color: theme.primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       );
 
   Widget _getLatestProjectsText(ThemeData theme, String text) => FadeTransition(

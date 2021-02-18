@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/helpers/launch_website.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../../helpers/social_media_list.dart';
 import '../../widgets/social_media_item.dart';
@@ -81,6 +80,7 @@ class _ContactState extends State<Contact> {
                 : mediaQuery.size.width / 3
             : mediaQuery.size.width,
         child: TextFormField(
+          validator:(val)=> val == null || val == "" ? "Please provide $hint" : (hint == 'email' && !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val)) ? "Please Provide correct email":null,
           keyboardType: hint == 'phone'
               ? TextInputType.phone
               : hint == 'email'
@@ -120,6 +120,7 @@ class _ContactState extends State<Contact> {
                         : mediaQuery.size.width / 3
                     : mediaQuery.size.width,
                 child: TextFormField(
+                  validator:(val)=> val.length < 10 ? "Please add some more text in message" :null,
                   onChanged: (val) => _emailData['content'] = val,
                   textInputAction: TextInputAction.newline,
                   keyboardType: TextInputType.multiline,
@@ -147,13 +148,16 @@ class _ContactState extends State<Contact> {
                 backgroundColor: theme.primaryColor,
               ),
               onPressed: () async {
-                firestore.add({
-                  'name':_emailData['name'],
-                  'email':_emailData['email'],
-                  'phone':_emailData['phone'],
-                  'content':_emailData['content']
-                }).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your mail has been sent")))).catchError((e) => print(e));
-
+                if(_formKey.currentState.validate()){
+                  firestore.add({
+                    'name':_emailData['name'],
+                    'email':_emailData['email'],
+                    'phone':_emailData['phone'],
+                    'content':_emailData['content']
+                  }).then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your mail has been sent")))).catchError((e) {
+                    print(e);
+                  });
+                }
               },
               child: Text(
                 'SEND MESSAGE',
